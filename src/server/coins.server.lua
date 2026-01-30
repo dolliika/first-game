@@ -1,4 +1,5 @@
 local Players = game:GetService("Players")
+
 local coins = workspace.Coins:GetChildren()
 
 for _, coin in ipairs(coins) do
