@@ -1,17 +1,26 @@
 local Players = game:GetService("Players")
 
-local buttonsFolder = workspace.Buttons
-local gatesFolder = workspace.Gates
+local buttons = workspace.Buttons
+local gates = workspace.Gates
 
-local buttons = buttonsFolder:GetChildren()
+local stage2UnlockButton = buttons.Stage2UnlockButton
+local finishUnlockButton = buttons.FinishUnlockButton
 
-local stage2UnlockButton = buttonsFolder.Stage2UnlockButton
-local finishUnlockButton = buttonsFolder.FinishUnlockButton
+local stage2Gate = gates.Stage2Gate
+local finishGate = gates.FinishGate
 
-local stage2Gate = gatesFolder.Stage2Gate
-local finishGate = gatesFolder.FinishGate
+local unlockMap = {
+  [stage2UnlockButton] = {
+      gate = stage2Gate,
+      timer = 8
+  },
+  [finishUnlockButton] = {
+      gate = finishGate,
+      timer = 4
+  }
+}
 
-for _, button in ipairs(buttons) do
+for _, button in ipairs(buttons:GetChildren()) do
   local debounce = false
 
   button.Touched:Connect(function(otherPart)
@@ -25,17 +34,6 @@ for _, button in ipairs(buttons) do
         debounce = false
         return
       end
-
-      local unlockMap = {
-        [stage2UnlockButton] = {
-            gate = stage2Gate,
-            timer = 8
-        },
-        [finishUnlockButton] = {
-            gate = finishGate,
-            timer = 4
-        }
-      }
     
       local config = unlockMap[button]
       if config then

@@ -1,8 +1,6 @@
 local Players = game:GetService("Players")
 
-local coins = workspace.Coins:GetChildren()
-
-for _, coin in ipairs(coins) do
+for _, coin in ipairs(workspace.Coins:GetChildren()) do
   coin:SetAttribute("Collected", false)
 
   coin.Touched:Connect(function(otherPart)
